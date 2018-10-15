@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Amira's Interro</title>
+    
+    <style type="text/css">
+      canvas { border: 1px solid black; }
+    </style>
+  </head>
+  <body onload="draw();">
+    <canvas id="myCanvas" width="800" height="480" background="red" ></canvas>
+	<script type="text/javascript">
+    setInterval(draw, 1000/60);
+      var c = document.getElementById("myCanvas");
+           var ctx = c.getContext("2d");
+          
+
+
+var im=new Image();    im.src='back1.png'; var score=0;
+
+var im2=new Image(); im2.src='back2.png'; 
+var grass=new Image();
+grass.src='grass.png';
+var img1=new Image();  img1.src ='walk.png' ;
+var pixelX=0, pixelY=0,i=1,k=1,xx=150,xx1=550,xx2=850,posY=275,b=-1,amira=1,c1=true,b1=-1,c2=true,b2=-1,c3=true,b3=-1;
+var monstre=new Image();
+monstre.src='obs1.png';
+var plante=new Image();
+plante.src='plant.png'; 
+var sma=new Image();
+sma.src='bg.png'; 
+var water=new Image();
+water.src='water.png'; 
+                
+                 var posX1=xx+Math.floor((Math.random() *(220)) );
+                 var posX2=xx1+Math.floor((Math.random() * (100)) );
+                 var posX3=xx2+Math.floor((Math.random() * (200)) ); var c=true;
+      function draw() {
+                                 ctx.clearRect(0,0,800,480);
+                                  ctx.drawImage(sma,0,0);
+
+                                 ctx.drawImage(im,0,0);
+                                 ctx.drawImage(im2,0,0);
+
+                                ctx.drawImage(water,0,0,32,32,0,448,800,32);
+                                  ctx.drawImage(grass,0,0,32,96,xx,320,285,30);
+
+                                 ctx.drawImage(grass,0,0,32,96,xx1,320,180,30);
+
+                                 ctx.drawImage(grass,0,0,32,96,xx2,320,240,30);
+
+                                 ctx.drawImage(monstre,posX1,290 );
+                                 ctx.drawImage(monstre,posX2,290 );
+                                 ctx.drawImage(plante,posX3,290);
+                        //collision avec plante
+                           
+                        if(180>=posX3 && 180<=posX3+30 )
+                         {  
+                              c1=true; 
+                           if (b1==-1 ) 
+                           { if(posY<=275 && posY>275-32) posY-=2; 
+                             if (posY<242) b=1;
+                           }
+
+                           if (b1==1 ) 
+                           {
+                              posY+=1;
+                              if ( posY>=275)
+                              {
+                                posY=275;  
+                                c1=false;
+                              }
+                           }
+                         }
+                         if(c1==false)  b1=-1;
+       
+                         //collision avec monstre1
+                           if(200>=posX1 && 200<=posX1+50  )
+                         {  
+                              c2=true; 
+                           if (b2==-1 ) 
+                           { if(posY<=275 && posY>275-32) posY-=2; 
+                             if (posY<242) b=1;
+                           }
+
+                           if (b2==1 ) 
+                           {
+                              posY+=1;
+                              if ( posY>=275)
+                              {
+                                posY=275;  
+                                c2=false;
+                              }
+                           }
+                         }
+                         if(c2==false)  b2=-1;
+
+                         //collision avec monstre2
+                           if(200>=posX2 && 200<=posX2+50 )
+                         {  
+                              c3=true; 
+                           if (b3==-1 ) 
+                           { if(posY<=275 && posY>275-32) posY-=2; 
+                             if (posY<245) b=1;
+                           }
+
+                           if (b3==1 ) 
+                           {
+                              posY+=1;
+                              if ( posY>=275)
+                              {
+                                posY=275;  
+                                c3=false;
+                              }
+                           }
+                         }
+                         if(c3==false)  b3=-1;
+
+
+                      //grass
+                       if (!(xx<=150 && xx+250>=150) && !(xx1<=150 && xx1+130>=150)  &&  !(xx2<=150 && xx2+200>=150)) 
+                        {   c=true; 
+                           if (b==-1 ) 
+                           {  posY-=1; 
+                             if (posY<190) b=1;
+                           }
+
+                           if (b==1 ) 
+                           {
+                              posY+=1;
+                              if ( posY>=275)
+                              {
+                                posY=275;  
+                                c=false;
+                              }
+                           }
+                           
+                        }
+                        else  
+                          { if(posY<275)
+                            posY+=1;
+                          }
+                        if(c==false)  b=-1;
+                      
+                       ctx.drawImage(img1, pixelX, pixelY,60,96, 150, posY, 32, 48);   
+
+                     
+        if(pixelX==240 && pixelY<96*4)
+        {  
+         pixelY+=96; pixelX=0;
+        }
+        else
+        { if (pixelY==288){pixelY=0; pixelX=0; }
+          else pixelX+=60;
+        }
+        if(pixelX==240){ pixelY+=96; pixelX=0;} 
+
+                  xx-=1;     xx2-=1;  xx1=xx1-1; posX3-=1; posX2-=1; posX1-=1;
+
+                  
+
+        if (xx==-285) {xx=800;  posX1=xx+Math.floor((Math.random() *(150)) );   }
+
+        if(xx1==-180) {xx1=xx+400;   posX2=xx1+Math.floor((Math.random() * (100)) ); }
+
+      
+        if(xx2==-240) {xx2=xx+700; posX3=xx2+Math.floor((Math.random() * (200)) ); }
+
+        
+}
+            
+      
+    
+
+      
+
+
+
+  
+
+
+
+
+     
+    </script>
+	
+  </body>
+</html>
